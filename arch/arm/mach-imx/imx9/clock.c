@@ -39,7 +39,6 @@ static struct imx_fracpll_rate_table imx9_fracpll_tbl[] = {
 	FRAC_PLL_RATE(800000000U, 1, 200, 6, 0, 1), /* 800Mhz */
 	FRAC_PLL_RATE(700000000U, 1, 145, 5, 5, 6), /* 700Mhz */
 	FRAC_PLL_RATE(600000000U, 1, 200, 8, 0, 1), /* 600Mhz */
-	FRAC_PLL_RATE(501900000U, 1, 167, 8, 0, 1),
 	FRAC_PLL_RATE(484000000U, 1, 121, 6, 0, 1),
 	FRAC_PLL_RATE(445333333U, 1, 167, 9, 0, 1),
 	FRAC_PLL_RATE(466000000U, 1, 155, 8, 1, 3), /* 466Mhz */
@@ -910,12 +909,8 @@ void mxs_set_lcdclk(u32 base_addr, u32 freq)
 	/* Select to video PLL */
 	debug("%s, best_pll = %u, div = %u\n", __func__, best_pll, best_div);
 
-	//VIDEO_PLL_CLK      ==> pixel clock * 7
 	configure_fracpll(VIDEO_PLL_CLK, best_pll);
-	//MEDIA_DISP_PIX_CLK ==> pixel clock ==> 62.6MHz
 	ccm_clk_root_cfg(MEDIA_DISP_PIX_CLK_ROOT, VIDEO_PLL_CLK, best_div);
-	//MEDIA_LDB_CLK_ROOT ==> pixel clock * 7
-	ccm_clk_root_cfg(MEDIA_LDB_CLK_ROOT, VIDEO_PLL_CLK, 1);
 }
 
 /*
