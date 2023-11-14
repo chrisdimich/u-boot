@@ -9,19 +9,17 @@
 
 / {
 	model = "NXP i.MX93 Boundary SMARC Board";
-	compatible = "fsl,imx93-9x9-qsb", "fsl,imx93";
+	compatible = "fsl,imx93";
 
 	chosen {
 		stdout-path = &lpuart1;
 	};
 
-#if 0
 	/* Our board swaps the ports */
 	aliases {
-                ethernet0 = &eqos;
-                ethernet1 = &fec;
+		ethernet0 = &eqos;
+		ethernet1 = &fec;
 	};
-#endif
 
 	reserved-memory {
 		#address-cells = <2>;
@@ -433,7 +431,7 @@
                 #clock-cells = <0>;
                 compatible = "microcrystal,rv3028";
                 reg = <0x52>;
-                interrupts-extended = <24 IRQ_TYPE_LEVEL_LOW>; /* SMARC GPIO12 */
+                // interrupts-extended = <24 IRQ_TYPE_LEVEL_LOW>; /* SMARC GPIO12 */
                 wakeup-source;
         };
 };
